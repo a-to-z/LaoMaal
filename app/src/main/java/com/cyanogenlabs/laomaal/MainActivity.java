@@ -1,8 +1,8 @@
 package com.cyanogenlabs.laomaal;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,14 +12,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookieStore;
+import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,11 +35,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final CookieManager cookieManager = new CookieManager();
+        CookieHandler.setDefault(cookieManager);
+
         final RequestQueue queue = Volley.newRequestQueue(this);
 
         String url = "https://www.laomaal.com/index.php?route=api/login";
 
         final TextView tv1 = (TextView) findViewById(R.id.tv1);
+        final TextView tv2 = (TextView) findViewById(R.id.tv2);
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -106,12 +114,24 @@ public class MainActivity extends AppCompatActivity {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("product_id", "28");
                         params.put("quantity", "1");
-                        params.put("token",token);
                         return params;
                     }
                 };
 
                 queue.add(addtocart);
+
+                Uri uri = Uri.parse("https://laomaal.com/");
+
+                CookieStore cookieStore = cookieManager.getCookieStore();
+
+                List cookieList = cookieStore.getCookies();
+
+                String json = new Gson().toJson(cookieList);
+
+                tv1.setText(json);
+
+                //Toast.makeText(getApplicationContext(),token,Toast.LENGTH_LONG).show();
+
             }
         });
 
