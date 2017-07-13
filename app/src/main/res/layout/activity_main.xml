@@ -17,9 +17,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.133"
         app:layout_constraintHorizontal_bias="0.501"
+        android:layout_marginTop="17dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/buy"
@@ -28,18 +28,54 @@
         android:text="Buy product_id 28"
         tools:layout_editor_absoluteX="98dp"
         tools:layout_editor_absoluteY="148dp"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/tv1"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tv1"
-        android:layout_alignRight="@+id/tv1"
+    <Button
+        android:id="@+id/shipadd"
+        android:layout_width="188dp"
+        android:layout_height="60dp"
+        android:text="Shipp Add"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="148dp"
         android:layout_below="@+id/buy"
-        android:layout_marginTop="69dp"
-        android:text="TextView" />
+        android:layout_alignLeft="@+id/buy"
+        android:layout_alignStart="@+id/buy" />
+
+    <Button
+        android:id="@+id/shipmtd"
+        android:layout_width="188dp"
+        android:layout_height="60dp"
+        android:text="Shipp Method"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="148dp"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/shipadd"
+        android:layout_alignStart="@+id/shipadd" />
+
+    <Button
+        android:id="@+id/cstmInfo"
+        android:layout_width="188dp"
+        android:layout_height="60dp"
+        android:text="Cstmr info"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="148dp"
+        android:layout_below="@+id/shipmtd"
+        android:layout_alignLeft="@+id/shipmtd"
+        android:layout_alignStart="@+id/shipmtd"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/crtOrder"
+        android:layout_width="188dp"
+        android:layout_height="60dp"
+        android:text="Submit Order"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="148dp"
+        android:layout_below="@+id/cstmInfo"
+        android:layout_alignLeft="@+id/cstmInfo"
+        android:layout_alignStart="@+id/cstmInfo"
+        android:layout_marginTop="11dp" />
 
 </RelativeLayout>

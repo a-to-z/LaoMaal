@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         String url = "https://www.laomaal.com/index.php?route=api/login";
 
         final TextView tv1 = (TextView) findViewById(R.id.tv1);
-        final TextView tv2 = (TextView) findViewById(R.id.tv2);
 
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                         Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        tv1.setText(response);
+                        tv1.setText(token);
                     }
                 },
                 new Response.ErrorListener()
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cartadd = "https://www.laomaal.com/index.php?route=api/cart/add";
+                String cartadd = "https://www.laomaal.com/index.php?route=api/cart/add" + "&token=" + token;
 
                 StringRequest addtocart = new StringRequest(Request.Method.POST,cartadd,new Response.Listener<String>()
                 {
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
                 queue.add(addtocart);
 
-                Uri uri = Uri.parse("https://laomaal.com/");
+                /*Uri uri = Uri.parse("https://laomaal.com/");
 
                 CookieStore cookieStore = cookieManager.getCookieStore();
 
@@ -128,9 +127,302 @@ public class MainActivity extends AppCompatActivity {
 
                 String json = new Gson().toJson(cookieList);
 
-                tv1.setText(json);
+                tv1.setText(json);*/
 
                 //Toast.makeText(getApplicationContext(),token,Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        Button shipAdd = (Button) findViewById(R.id.shipadd);
+
+        shipAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String shipAddrs = "https://www.laomaal.com/index.php?route=api/shipping/address" + "&token=" + token;
+
+                StringRequest shippingAddress = new StringRequest(Request.Method.POST,shipAddrs,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("firstname", "Ammar");
+                        params.put("lastname", "Zubair");
+                        params.put("address_1", "mygerrys");
+                        params.put("city", "KARACHI");
+                        params.put("country_id", "1");
+                        params.put("zone_id", "4473");
+                        return params;
+                    }
+                };
+
+                queue.add(shippingAddress);
+
+                String payAddrs = "https://www.laomaal.com/index.php?route=api/payment/address" + "&token=" + token;
+
+                StringRequest payAddress = new StringRequest(Request.Method.POST,payAddrs,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("firstname", "Ammar");
+                        params.put("lastname", "Zubair");
+                        params.put("address_1", "mygerrys");
+                        params.put("city", "KARACHI");
+                        params.put("country_id", "1");
+                        params.put("zone_id", "4473");
+                        return params;
+                    }
+                };
+
+                queue.add(payAddress);
+            }
+        });
+
+        Button shipMtd = (Button) findViewById(R.id.shipmtd);
+
+        shipMtd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String shipMethods = "https://www.laomaal.com/index.php?route=api/shipping/methods" + "&token=" + token;
+
+                StringRequest shippingMethods = new StringRequest(Request.Method.POST,shipMethods,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("shipping_method", "free.free");
+                        return params;
+                    }
+                };
+
+                queue.add(shippingMethods);
+
+                String shipMethod = "https://www.laomaal.com/index.php?route=api/shipping/method" + "&token=" + token;
+
+                StringRequest shippingMethod = new StringRequest(Request.Method.POST,shipMethod,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("shipping_method", "free.free");
+                        return params;
+                    }
+                };
+
+                queue.add(shippingMethod);
+
+                String paymMethods = "https://www.laomaal.com/index.php?route=api/payment/methods" + "&token=" + token;
+
+                StringRequest payMethods = new StringRequest(Request.Method.POST,paymMethods,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("shipping_method", "cod");
+                        return params;
+                    }
+                };
+
+                queue.add(payMethods);
+
+                String paymMethod = "https://www.laomaal.com/index.php?route=api/payment/method" + "&token=" + token;
+
+                StringRequest payMethod = new StringRequest(Request.Method.POST,paymMethod,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("payment_method", "cod");
+                        return params;
+                    }
+                };
+
+                queue.add(payMethod);
+
+            }
+        });
+
+        Button cstInfo = (Button) findViewById(R.id.cstmInfo);
+
+        cstInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cstmrInfo = "https://www.laomaal.com/index.php?route=api/customer" + "&token=" + token;
+
+                StringRequest cstmInfo = new StringRequest(Request.Method.POST,cstmrInfo,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("firstname", "Ammar");
+                        params.put("lastname", "Zubair");
+                        params.put("email", "ammarzubair@gmail.com");
+                        params.put("telephone", "03472548185");
+                        return params;
+                    }
+                };
+
+                queue.add(cstmInfo);
+
+            }
+        });
+
+        Button crtOrder = (Button) findViewById(R.id.crtOrder);
+
+        crtOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String crtOrder = "https://www.laomaal.com/index.php?route=api/order/add" + "&token=" + token;
+
+                StringRequest createOrder = new StringRequest(Request.Method.POST,crtOrder,new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("shipping_method", "free.free");
+                        return params;
+                    }
+                };
+
+                queue.add(createOrder);
 
             }
         });
